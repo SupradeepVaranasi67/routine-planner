@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daylight Desk | Routines</title>
+  <meta
+    name="description"
+    content="Track habits, hydration, and quick daily reflections in a static multi-page website."
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="routines">
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">DD</span>
+        <span>
+          <strong>Daylight Desk</strong>
+          <small>Static daily planner</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html">Overview</a>
+        <a href="planner.html">Planner</a>
+        <a class="is-active" href="routines.html">Routines</a>
+      </nav>
+
+      <button class="ghost-button theme-toggle" type="button" aria-label="Toggle color theme">Dark mode</button>
+    </header>
+
+    <main class="routines-layout">
+      <section class="card section-card routine-board-card">
+        <div class="section-heading compact">
+          <div>
+            <p class="eyebrow">Routine board</p>
+            <h1>Small habits that make the day feel intentional</h1>
+          </div>
+        </div>
+
+        <form id="routineForm" class="stack-form routine-form">
+          <input id="routineEditId" type="hidden">
+          <label>
+            Routine title
+            <input id="routineTitle" type="text" maxlength="70" placeholder="Take a 10-minute walk">
+          </label>
+          <label>
+            Routine detail
+            <textarea id="routineCopy" rows="3" maxlength="180" placeholder="Short reminder for why this routine helps."></textarea>
+          </label>
+          <div class="button-row">
+            <button class="primary-button" type="submit">Save routine</button>
+            <button class="ghost-button" id="cancelRoutineEditButton" type="button">Cancel edit</button>
+          </div>
+        </form>
+
+        <div id="routineList" class="routine-list"></div>
+      </section>
+
+      <section class="side-column">
+        <article class="card section-card hydration-card">
+          <div class="section-heading compact">
+            <div>
+              <p class="eyebrow">Hydration</p>
+              <h2>Water tracker</h2>
+            </div>
+          </div>
+
+          <div class="hydration-display">
+            <strong id="waterCount">0</strong>
+            <span>glasses today</span>
+          </div>
+
+          <div class="button-row">
+            <button class="primary-button" id="addWaterButton" type="button">Add glass</button>
+            <button class="ghost-button" id="resetWaterButton" type="button">Reset</button>
+          </div>
+        </article>
+
+        <article class="card section-card reflection-card">
+          <div class="section-heading compact">
+            <div>
+              <p class="eyebrow">Reflection</p>
+              <h2>End-of-day note</h2>
+            </div>
+          </div>
+
+          <form id="reflectionForm" class="stack-form">
+            <label>
+              What went well today?
+              <textarea id="reflectionInput" rows="6" maxlength="260" placeholder="Capture one useful lesson or win."></textarea>
+            </label>
+            <button class="primary-button" type="submit">Save reflection</button>
+          </form>
+
+          <article class="saved-reflection" id="reflectionPreview">
+            <p class="empty-state">No reflection saved for today.</p>
+          </article>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <template id="routineItemTemplate">
+    <article class="routine-item">
+      <label>
+        <input class="routine-toggle" type="checkbox">
+        <div>
+          <strong class="routine-title"></strong>
+          <p class="routine-copy"></p>
+        </div>
+      </label>
+      <div class="routine-actions">
+        <span class="badge routine-streak"></span>
+        <button class="ghost-button compact edit-routine-button" type="button">Edit</button>
+        <button class="ghost-button compact delete-routine-button" type="button">Delete</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>

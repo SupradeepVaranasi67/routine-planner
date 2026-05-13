@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daylight Desk | Daily Planner</title>
+  <meta
+    name="description"
+    content="A polished multi-page daily planner with focus tracking, routines, and browser-saved productivity tools."
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="home">
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">DD</span>
+        <span>
+          <strong>Daylight Desk</strong>
+          <small>Static daily planner</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a class="is-active" href="index.html">Overview</a>
+        <a href="planner.html">Planner</a>
+        <a href="routines.html">Routines</a>
+      </nav>
+
+      <button class="ghost-button theme-toggle" type="button" aria-label="Toggle color theme">Dark mode</button>
+    </header>
+
+    <main>
+      <section class="hero card hero-card">
+        <div class="hero-copy">
+          <p class="eyebrow">Useful static website, not an SPA</p>
+          <h1>Keep your day organised without needing a backend.</h1>
+          <p class="hero-text">
+            Daylight Desk is a browser-saved planning workspace with a real landing page, separate utility pages, and enough interactivity to make it worth demoing after you dockerize it.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-link" href="planner.html">Open planner</a>
+            <a class="ghost-link" href="routines.html">Check routines</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <p class="panel-label">Today</p>
+          <h2 id="todayDate">Tuesday, 12 May</h2>
+          <div class="snapshot-grid">
+            <article>
+              <span>Tasks due</span>
+              <strong id="snapshotTasksDue">0</strong>
+            </article>
+            <article>
+              <span>Completed today</span>
+              <strong id="snapshotTasksDone">0</strong>
+            </article>
+            <article>
+              <span>Routines done</span>
+              <strong id="snapshotRoutinesDone">0</strong>
+            </article>
+            <article>
+              <span>Focus minutes</span>
+              <strong id="snapshotFocusMinutes">0</strong>
+            </article>
+          </div>
+        </aside>
+      </section>
+
+      <section class="home-grid">
+        <section class="card section-card focus-card">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Focus block</p>
+              <h2>Your main task for today</h2>
+            </div>
+            <button class="ghost-button" id="clearFocusButton" type="button">Clear</button>
+          </div>
+
+          <form class="stack-form" id="focusForm">
+            <label>
+              Focus title
+              <input id="focusTitle" type="text" maxlength="90" placeholder="Finish the proposal deck">
+            </label>
+            <label>
+              Notes
+              <textarea id="focusNotes" rows="4" maxlength="240" placeholder="What makes this important today?"></textarea>
+            </label>
+            <button class="primary-button" type="submit">Save focus</button>
+          </form>
+
+          <article class="saved-focus" id="focusPreview">
+            <p class="empty-state">No focus block saved yet.</p>
+          </article>
+        </section>
+
+        <section class="card section-card agenda-card">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Quick agenda</p>
+              <h2>Plan three anchor moments</h2>
+            </div>
+          </div>
+
+          <form class="agenda-form" id="agendaForm">
+            <label>
+              Morning
+              <input id="morningPlan" type="text" maxlength="80" placeholder="Review priorities and clear email">
+            </label>
+            <label>
+              Midday
+              <input id="middayPlan" type="text" maxlength="80" placeholder="Deep work on presentation draft">
+            </label>
+            <label>
+              Evening
+              <input id="eveningPlan" type="text" maxlength="80" placeholder="Exercise and prep tomorrow's top task">
+            </label>
+            <button class="primary-button secondary" type="submit">Save agenda</button>
+          </form>
+
+          <div class="agenda-preview" id="agendaPreview"></div>
+        </section>
+      </section>
+
+      <section class="home-grid bottom-grid">
+        <section class="card section-card timer-card">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Focus timer</p>
+              <h2>Run a simple Pomodoro</h2>
+            </div>
+          </div>
+
+          <div class="timer-shell">
+            <div class="timer-ring">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="ring-base" cx="60" cy="60" r="48"></circle>
+                <circle class="ring-progress" id="timerProgress" cx="60" cy="60" r="48"></circle>
+              </svg>
+              <strong id="timerDisplay">25:00</strong>
+            </div>
+
+            <div class="timer-controls">
+              <label>
+                Minutes
+                <input id="timerMinutes" type="number" min="5" max="60" value="25">
+              </label>
+              <div class="button-row">
+                <button class="primary-button" id="startTimerButton" type="button">Start</button>
+                <button class="ghost-button" id="pauseTimerButton" type="button">Pause</button>
+                <button class="ghost-button" id="resetTimerButton" type="button">Reset</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section-card overview-card">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">At a glance</p>
+              <h2>What this site already demonstrates</h2>
+            </div>
+          </div>
+
+          <ul class="feature-list">
+            <li>Separate HTML pages, so it stays a regular website instead of behaving like an SPA.</li>
+            <li>Useful browser-side functionality: planner, routines, saved notes, and timer.</li>
+            <li>Persistent local storage, which makes the demo feel real even before you add infrastructure.</li>
+            <li>A polished UI that is worth exposing later through containers, services, and ingress.</li>
+          </ul>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

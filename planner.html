@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daylight Desk | Planner</title>
+  <meta
+    name="description"
+    content="Manage daily tasks with status filters, due dates, and browser-saved planning."
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="planner">
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">DD</span>
+        <span>
+          <strong>Daylight Desk</strong>
+          <small>Static daily planner</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html">Overview</a>
+        <a class="is-active" href="planner.html">Planner</a>
+        <a href="routines.html">Routines</a>
+      </nav>
+
+      <button class="ghost-button theme-toggle" type="button" aria-label="Toggle color theme">Dark mode</button>
+    </header>
+
+    <main class="planner-layout">
+      <section class="card section-card task-entry-card">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Task entry</p>
+            <h1>Plan work that actually fits the day</h1>
+          </div>
+        </div>
+
+        <form id="taskForm" class="task-form">
+          <label>
+            Task title
+            <input id="taskTitle" type="text" maxlength="90" placeholder="Prepare client follow-up email">
+          </label>
+          <div class="grid-two">
+            <label>
+              Category
+              <select id="taskCategory">
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Health">Health</option>
+                <option value="Errands">Errands</option>
+              </select>
+            </label>
+            <label>
+              Priority
+              <select id="taskPriority">
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </label>
+          </div>
+          <div class="grid-two">
+            <label>
+              Due date
+              <input id="taskDueDate" type="date">
+            </label>
+            <label>
+              Estimate in minutes
+              <input id="taskEstimate" type="number" min="5" max="480" step="5" value="30">
+            </label>
+          </div>
+          <label>
+            Notes
+            <textarea id="taskNotes" rows="4" maxlength="220" placeholder="Optional details or next step."></textarea>
+          </label>
+          <button class="primary-button" type="submit">Add task</button>
+        </form>
+      </section>
+
+      <aside class="planner-sidebar">
+        <section class="card section-card summary-card">
+          <p class="eyebrow">Planner summary</p>
+          <div class="summary-grid">
+            <article>
+              <span>Open tasks</span>
+              <strong id="openTasksCount">0</strong>
+            </article>
+            <article>
+              <span>Due today</span>
+              <strong id="dueTodayCount">0</strong>
+            </article>
+            <article>
+              <span>Completed</span>
+              <strong id="completedTasksCount">0</strong>
+            </article>
+            <article>
+              <span>Planned time</span>
+              <strong id="plannedMinutesCount">0m</strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="card section-card filter-card">
+          <div class="section-heading compact">
+            <div>
+              <p class="eyebrow">Filters</p>
+              <h2>Find what matters</h2>
+            </div>
+          </div>
+
+          <label>
+            Search
+            <input id="taskSearch" type="search" placeholder="Search titles or notes">
+          </label>
+
+          <div class="chip-row" role="group" aria-label="Task status filters">
+            <button class="filter-chip is-active" data-status="all" type="button">All</button>
+            <button class="filter-chip" data-status="open" type="button">Open</button>
+            <button class="filter-chip" data-status="done" type="button">Done</button>
+          </div>
+        </section>
+      </aside>
+
+      <section class="card section-card task-list-card">
+        <div class="section-heading compact">
+          <div>
+            <p class="eyebrow">Task list</p>
+            <h2>Saved in your browser</h2>
+          </div>
+        </div>
+        <div id="taskList" class="task-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <template id="taskItemTemplate">
+    <article class="task-item">
+      <div class="task-main">
+        <label class="task-checkline">
+          <input class="task-toggle" type="checkbox">
+          <div>
+            <strong class="task-title"></strong>
+            <p class="task-meta"></p>
+          </div>
+        </label>
+        <div class="task-pills">
+          <span class="badge task-priority"></span>
+          <span class="badge task-category"></span>
+        </div>
+      </div>
+      <p class="task-notes"></p>
+      <div class="task-footer">
+        <span class="task-estimate"></span>
+        <button class="ghost-button compact remove-task-button" type="button">Delete</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
